@@ -42,12 +42,18 @@ class _ChatView extends StatelessWidget {
           children: [
             Expanded(
               child: ListView.builder(
-                itemCount: chatProvider.messageList.length,
+                controller:
+                    chatProvider
+                        .chatScrollController, //permite controlar el desplazamiento hacia abajo de la app
+                itemCount:
+                    chatProvider
+                        .messageList
+                        .length, // me permite llevar la cuetna de los mensajes
                 itemBuilder: (context, index) {
                   final message = chatProvider.messageList[index];
 
                   return (message.fromWho == FromWho.hers)
-                      ? HerMessageBubble()
+                      ? HerMessageBubble(message: message)
                       : MiMessageBubble(message: message);
                 },
               ),
